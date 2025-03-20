@@ -2,6 +2,7 @@ import baostock as bs
 from tabulate import tabulate
 from datetime import datetime, timedelta
 
+from query_type import QueryType
 from sz50 import get_top_code
 
 
@@ -46,12 +47,12 @@ def get_stock_pe(code_list : list):
 
 
 if __name__ == '__main__':
-    result = get_top_code(0)
+    result = get_top_code(QueryType.SZ50)
     pe = get_stock_pe(result)
     headers = ["name", "date", "code", "close", "peTTM", "pbMRQ", "psTTM", "pcfNcfTTM"]
     print(tabulate(pe, headers=headers, tablefmt="pretty"))
 
-    result = get_top_code(1)
+    result = get_top_code(QueryType.HS300)
     pe = get_stock_pe(result)
     headers = ["name", "date", "code", "close", "peTTM", "pbMRQ", "psTTM", "pcfNcfTTM"]
     print(tabulate(pe, headers=headers, tablefmt="pretty"))

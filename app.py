@@ -3,6 +3,7 @@ import json
 from flask import Flask
 
 from pe import get_stock_pe
+from query_type import QueryType
 from sz50 import get_top_code
 
 app = Flask(__name__)
@@ -13,13 +14,13 @@ def hello_world():
 
 @app.route('/sz50')
 def hello_world():
-    result = get_top_code(0)
+    result = get_top_code(QueryType.SZ50)
     pe = get_stock_pe(result)
     return json.dumps(pe)
 
 @app.route('/hs300')
 def hello_world():
-    result = get_top_code(1)
+    result = get_top_code(QueryType.HS300)
     pe = get_stock_pe(result)
     return json.dumps(pe)
 
