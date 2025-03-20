@@ -1,7 +1,6 @@
-import akshare.stock_feature.stock_a_indicator as stock_a_indicator
 import time
-from sz50 import get_top_50_code
 
+import akshare.stock_feature.stock_a_indicator as stock_a_indicator
 
 def get_all_pe_info(code_list: list):
     result_list = []
@@ -15,9 +14,3 @@ def get_all_pe_info(code_list: list):
             print(e)
             pass
     return result_list
-
-if __name__ == '__main__':
-    result = get_top_50_code()
-    pe = get_all_pe_info(result)
-    pe.sort(key=lambda x: x[1])
-    print(pe)
