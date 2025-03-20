@@ -2,8 +2,15 @@ import baostock as bs
 from tabulate import tabulate
 from datetime import datetime, timedelta
 
-from sz50 import get_top_50_code
+from sz50 import get_top_code
 
+
+def sort_key(row):
+    value = float(row[3])
+    if value >= 0:
+        return 0, value
+    else:
+        return 1, -value
 
 def get_stock_pe(code_list : list):
     #### 登陆系统 ####
@@ -33,12 +40,17 @@ def get_stock_pe(code_list : list):
     #### 登出系统 ####
     bs.logout()
     flattened_data = [item[0] for item in result_list]
-    sorted_data = sorted(flattened_data, key=lambda x: float(x[3]))
+    sorted_data = sorted(flattened_data, key = sort_key)
     return sorted_data
 
 
 if __name__ == '__main__':
-    result = get_top_50_code()
+    result = get_top_code(0)
     pe = get_stock_pe(result)
-    headers = ["Date", "Code", "Price", "Col4", "Col5", "Col6", "Col7"]
+    headers = ["date", "code", "close", "peTTM", "pbMRQ", "psTTM", "pcfNcfTTM"]
+    print(tabulate(pe, headers=headers, tablefmt="pretty"))
+
+    result = get_top_code(1)
+    pe = get_stock_pe(result)
+    headers = ["date", "code", "close", "peTTM", "pbMRQ", "psTTM", "pcfNcfTTM"]
     print(tabulate(pe, headers=headers, tablefmt="pretty"))
