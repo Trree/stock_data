@@ -18,7 +18,7 @@ def get_top_code(query_type : int):
         print('query_sz50  error_msg:' + rs.error_msg)
     result_list = []
     for data in rs.data:
-        result_list.append(data[1])
+        result_list.append((data[1], data[2]))
     # 登出系统
     bs.logout()
     return result_list

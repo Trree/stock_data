@@ -7,11 +7,9 @@ from sz50 import get_top_code
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def hello_world():
     return "hello world"
-
 
 @app.route('/sz50')
 def hello_world():
